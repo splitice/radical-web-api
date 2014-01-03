@@ -4,6 +4,7 @@ namespace Radical\Web\Page\Router\Recognisers;
 use Radical\Utility\Net\URL;
 use Radical\Web\Page\Router\IPageRecognise;
 use Radical\Web\Page\Handler;
+use Radical\Core\Libraries;
 
 class API implements IPageRecognise {
 	const DEFAULT_TYPE = 'json';
@@ -28,11 +29,13 @@ class API implements IPageRecognise {
 				$type = $parts[1];
 			}
 			
-			//Check Class
-			$c = '\\Web\\Page\\API\\Module\\'.$module;
-			if(!class_exists($c)){
+			//Find Class
+			$c = '\\*\\Web\\Page\\API\\Module\\'.$module;
+			$classes = Libraries::get($c);
+			if(!count($classes)){
 				return static::Error('Invalid Module',$type);
 			}
+			$c = $classes[0];
 			
 			//Check Type
 			switch($type){
