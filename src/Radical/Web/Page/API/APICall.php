@@ -83,7 +83,6 @@ class APICall {
 		}
 		
 		if($data === false){
-			die(($text));
 			throw new \Exception($text);
 		}
 		
