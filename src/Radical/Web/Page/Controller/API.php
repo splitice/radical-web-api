@@ -89,6 +89,8 @@ class API extends PageBase {
 			default:
 				if(isset($ret['response'])){
 					echo $ret['response'];
+				}elseif(isset($ret['error'])){
+					echo \Radical\Basic\JSON::encode($ret);
 				}
 		}
 	}
