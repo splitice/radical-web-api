@@ -18,13 +18,18 @@ class API extends PageBase {
 			$this->method = $data['method'];
 		}
 	}
-	function _addChild($k,$v,$xml){
-		$xml->addChild($v,$k);
+	function _addChild($v, $k,$xml){
+        if(is_object($v)){
+            $d = array($k=>get_object_vars($v));
+            array_walk_recursive($d, array ($this, '_addChild'), $xml);
+        }else{
+		    $xml->addChild($k,$v);
+        }
 	}
 	function toXML(array $array){
 		$xml = new \SimpleXMLElement('<API/>');
 		array_walk_recursive($array, array ($this, '_addChild'), $xml);
-		return $xml->asXML();
+		return @$xml->asXML();
 	}
 	
 	function POST(){
