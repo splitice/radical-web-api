@@ -35,6 +35,15 @@ class API extends PageBase {
 	function POST(){
 		return $this->GET();
 	}
+
+    protected function process_exception(\Exception $ex){
+        $ret = array();
+        $ret['error'] = $ex->getMessage();
+        if($ex->getCode()){
+            $ret['code'] = $ex->getCode();
+        }
+        return $ret;
+    }
 	
 	/**
 	 * Handle GET request
@@ -53,10 +62,7 @@ class API extends PageBase {
 				$ret['response'] = $this->object->$m();
 			}catch(\Exception $ex){
 				if(ob_get_level()) ob_clean();
-				$ret['error'] = $ex->getMessage();
-				if($ex->getCode()){
-					$ret['code'] = $ex->getCode();
-				}
+				$ret = $this->process_exception($ex);
 			}
 		}
 		
