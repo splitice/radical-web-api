@@ -17,4 +17,7 @@ abstract class APIBase implements IAPIModule {
 	function output_type($type){
 		return $type;
 	}
+    function response_container(){
+        return 'response';
+    }
 }

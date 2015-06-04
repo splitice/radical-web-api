@@ -59,7 +59,7 @@ class API extends PageBase {
 			$m = $this->method;
 			
 			try {
-				$ret['response'] = $this->object->$m();
+				$ret[$this->object->response_container()] = $this->object->$m();
 			}catch(\Exception $ex){
 				if(ob_get_level()) ob_clean();
 				$ret = $this->process_exception($ex);
@@ -96,6 +96,9 @@ class API extends PageBase {
 				echo serialize($ret);
 				$headers->Add('Content-Type','text/plain');
 				break;
+
+            case 'plain':
+                break;
 				
 			default:
 				if(isset($ret['response'])){
