@@ -1,10 +1,10 @@
 <?php
 namespace Radical\Web\Page\Router\Recognisers;
 
-use Radical\Utility\Net\URL;
-use Radical\Web\Page\Router\IPageRecognise;
-use Radical\Web\Page\Handler;
 use Radical\Core\Libraries;
+use Radical\Utility\Net\URL;
+use Radical\Web\Page\Handler;
+use Radical\Web\Page\Router\IPageRecognise;
 
 class API implements IPageRecognise {
 	const DEFAULT_TYPE = 'json';
