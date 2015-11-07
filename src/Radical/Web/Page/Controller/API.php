@@ -115,7 +115,7 @@ class API extends PageBase {
 		if($this->error){
 			return $this->error($this->error, $this->type);
 		}else{
-			$object = $this->make_object($http_method, $type);
+			$object = $this->make_object($http_method, $this->type);
 
 			if(!$object){
 				return $this->error('Invalid Module: '.$this->module, $this->type);
