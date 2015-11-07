@@ -2,6 +2,6 @@
 namespace Radical\Web\Page\API\Module;
 
 interface IAPIModule {
-	static function canType($type);
-	function can($method);
+	function _canType($type);
+	function _can($method);
 }

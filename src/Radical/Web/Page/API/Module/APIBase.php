@@ -4,20 +4,23 @@ namespace Radical\Web\Page\API\Module;
 abstract class APIBase implements IAPIModule {
 	protected $data;
 	protected $type;
-	function __construct($data,$type){
+	protected $method;
+
+	function __construct($data,$type,$http_method='GET'){
 		$this->data = $data;
 		$this->type = $type;
+		$this->method = $http_method;
 	}
-	static function canType($type){
-		return false;
+	function _canType($type){
+		return in_array($type, ['json','xml','plain','ps']);
 	}
-	function can($method){
+	function _can($method){
 		return method_exists($this, $method);
 	}
-	function output_type($type){
+	function _output_type($type){
 		return $type;
 	}
-    function response_container(){
+    function _response_container(){
         return 'response';
     }
 }
