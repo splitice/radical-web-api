@@ -2,6 +2,7 @@
 namespace Radical\Web\Page\Controller;
 
 use Radical\Core\Libraries;
+use Radical\Web\Page\Controller\Special\Redirect;
 use Radical\Web\Page\Handler\PageBase;
 
 class API extends PageBase {
@@ -132,7 +133,11 @@ class API extends PageBase {
 			}
 
 			try {
-				$ret[$object->_response_container()] = $object->{$this->method}();
+				$obj = $object->{$this->method}();
+				if($obj && $obj instanceof Redirect){
+					return $obj;
+				}
+				$ret[$object->_response_container()] = $obj;
 			}catch(\Exception $ex){
 				if(ob_get_level()) ob_clean();
 				$ret = $this->process_exception($ex);
