@@ -109,7 +109,7 @@ class API extends PageBase {
 	 *
 	 * @throws \Exception
 	 */
-	function execute_request($http_method){
+	function execute_request($http_method, $d = null){
 		$ret = array();
 
 		$type = 'json';
