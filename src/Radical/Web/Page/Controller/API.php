@@ -103,6 +103,11 @@ class API extends PageBase {
 				}
 		}
 	}
+
+    protected function reportError(\Exception $ex)
+    {
+        return true;
+    }
 	
 	/**
 	 * Handle GET request
